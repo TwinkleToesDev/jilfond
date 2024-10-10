@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique()->index();
             $table->string('name')->index();
+            $table->string('email')->unique();
+            $table->text('about')->nullable();
             $table->timestamps();
         });
     }
