@@ -47,7 +47,6 @@ const actions = {
     },
 
     async getUserById({ commit }, userId) {
-        console.log('getUserById')
         commit('SET_PROFILE_LOADING', true);
         commit('SET_ERROR', null);
 
