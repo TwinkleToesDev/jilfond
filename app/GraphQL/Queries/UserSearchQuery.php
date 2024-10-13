@@ -83,6 +83,7 @@ class UserSearchQuery extends Query
             foreach ($searchTerms as $term) {
                 if (is_numeric($term)) {
                     $query->orWhere('id', $term);
+                    break;
                 }
 
                 $query->orWhere('username', 'ilike', '%' . $term . '%')
