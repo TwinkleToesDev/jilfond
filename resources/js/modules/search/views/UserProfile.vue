@@ -160,7 +160,7 @@ onBeforeRouteUpdate((to, from, next) => {
 .user-profile-information {
     text-align: center;
     color: #888;
-    height: calc(100% - 40px);
+    height: calc(100% - 60px);
     width: 100%;
     display: flex;
     align-items: center;
