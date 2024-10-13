@@ -10,7 +10,7 @@ class UserType extends GraphQLType
 {
     protected $attributes = [
         'name' => 'user',
-        'description' => 'A user type',
+        'description' => 'User type',
         'model' => User::class,
     ];
 
@@ -28,6 +28,22 @@ class UserType extends GraphQLType
             'name' => [
                 'type' => Type::string(),
                 'description' => 'The name of the user',
+            ],
+            'about' => [
+                'type' => Type::string(),
+                'description' => 'The "About me" field',
+            ],
+            'email' => [
+                'type' => Type::string(),
+                'description' => 'The email of the user',
+            ],
+            'image_url' => [
+                'type' => Type::string(),
+                'description' => 'User image URL',
+            ],
+            'phone' => [
+                'type' => Type::string(),
+                'description' => 'User phone number',
             ],
         ];
     }

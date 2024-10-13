@@ -13,6 +13,8 @@ class User extends Model
         'username',
         'name',
         'email',
-        'about'
+        'about',
+        'image_url',
+        'phone'
     ];
 }

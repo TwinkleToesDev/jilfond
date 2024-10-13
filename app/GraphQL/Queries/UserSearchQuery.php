@@ -22,10 +22,20 @@ class UserSearchQuery extends Query
     public function args(): array
     {
         return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::listOf(Type::int()),
+                'description' => 'Filter by user IDs',
+            ],
             'search' => [
                 'name' => 'search',
                 'type' => Type::string(),
                 'description' => 'Search term to filter users by id, username, or name',
+            ],
+            'limit' => [
+                'name' => 'limit',
+                'type' => Type::int(),
+                'description' => 'Limit the number of results returned',
             ],
         ];
     }
@@ -33,6 +43,8 @@ class UserSearchQuery extends Query
     public function rules(array $args = []): array
     {
         return [
+            'id' => ['nullable', 'array'],
+            'id.*' => ['integer'],
             'search' => ['nullable', 'string'],
         ];
     }
@@ -48,19 +60,34 @@ class UserSearchQuery extends Query
     {
         $query = User::query();
 
+        if (isset($args['id'])) {
+            $query->whereIn('id', $args['id']);
+        }
+
         if (isset($args['search'])) {
-            $searchTerm = $args['search'];
+            $this->applySearchFilter($query, $args['search']);
+        }
 
-            $query->where(function($query) use ($searchTerm) {
-                if (is_numeric($searchTerm)) {
-                    $query->orWhere('id', $searchTerm);
-                }
-
-                $query->orWhere('username', 'ilike', '%' . $searchTerm . '%')
-                    ->orWhere('name', 'ilike', '%' . $searchTerm . '%');
-            });
+        if (isset($args['limit'])) {
+            $query->limit($args['limit']);
         }
 
         return $query->get();
+    }
+
+    private function applySearchFilter($query, string $search): void
+    {
+        $searchTerms = array_map('trim', explode(',', $search));
+
+        $query->where(function ($query) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if (is_numeric($term)) {
+                    $query->orWhere('id', $term);
+                }
+
+                $query->orWhere('username', 'ilike', '%' . $term . '%')
+                    ->orWhere('name', 'ilike', '%' . $term . '%');
+            }
+        });
     }
 }
