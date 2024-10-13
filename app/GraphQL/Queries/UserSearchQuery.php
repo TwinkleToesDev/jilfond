@@ -30,7 +30,7 @@ class UserSearchQuery extends Query
             'search' => [
                 'name' => 'search',
                 'type' => Type::string(),
-                'description' => 'Search term to filter users by id, username, or name',
+                'description' => 'Filter by user usernames',
             ],
             'limit' => [
                 'name' => 'limit',
@@ -86,8 +86,7 @@ class UserSearchQuery extends Query
                     break;
                 }
 
-                $query->orWhere('username', 'ilike', '%' . $term . '%')
-                    ->orWhere('name', 'ilike', '%' . $term . '%');
+                $query->orWhere('username', 'ilike', '%' . $term . '%');
             }
         });
     }
