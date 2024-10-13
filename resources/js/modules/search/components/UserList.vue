@@ -3,11 +3,12 @@
         <h4 class="user-list__title">{{$t('search_result_title')}}</h4>
 
         <div v-if="userListLoading" class="user-list__loader">{{$t('loading_label')}}</div>
-        <p v-if="users.length === 0 && !userListLoading" class="user-list__empty">{{$t('search_result_empty')}}</p>
+        <p v-if="error" class="user-list__error-text error-text">{{ error }}</p>
+        <p v-if="!error && users.length === 0 && !userListLoading" class="user-list__empty">{{$t('search_result_empty')}}</p>
 
         <div class="user-list__search-result" v-else>
-            <p v-if="error" class="user-list__error-text error-text">{{ error }}</p>
-            <ul v-else class="user-list__items">
+
+            <ul v-if="!error" class="user-list__items">
                 <li
                     v-for="user in users"
                     :key="user.id"
@@ -194,7 +195,7 @@ const selectUser = (userId) => {
     }
 
     &__error-text {
-        margin-top: 10px;
+        margin: 10px 0 0 5px;
     }
 
 }
