@@ -50,7 +50,7 @@ const store = useStore();
 
 const user = computed(() => store.getters['search/user'] || null);
 let loading = computed(() => store.getters['search/profileLoading']);
-const error = computed(() => store.getters['search/error']);
+const error = computed(() => store.getters['search/userError']);
 
 const imageLoadingStatus = ref({});
 

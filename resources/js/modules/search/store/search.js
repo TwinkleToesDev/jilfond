@@ -6,7 +6,8 @@ const state = {
     users: [],
     userListLoading: false,
     profileLoading: false,
-    error: null,
+    searchError: null,
+    userError: null
 };
 
 const getters = {
@@ -14,13 +15,14 @@ const getters = {
     users: (state) => state.users,
     userListLoading: (state) => state.userListLoading,
     profileLoading: (state) => state.profileLoading,
-    error: (state) => state.error,
+    searchError: (state) => state.searchError,
+    userError: (state) => state.userError
 };
 
 const actions = {
     async searchUsers({ commit }, searchTerm) {
         commit('SET_USER_LIST_LOADING', true);
-        commit('SET_ERROR', null);
+        commit('SET_SEARCH_ERROR', null);
 
         const SEARCH_USERS = gql`
           query($search: String) {
@@ -40,7 +42,7 @@ const actions = {
             });
             commit('SET_USERS', response.data.userSearch);
         } catch (error) {
-            commit('SET_ERROR', error.message);
+            commit('SET_SEARCH_ERROR', error.message);
         } finally {
             commit('SET_USER_LIST_LOADING', false);
         }
@@ -48,7 +50,7 @@ const actions = {
 
     async getUserById({ commit }, userId) {
         commit('SET_PROFILE_LOADING', true);
-        commit('SET_ERROR', null);
+        commit('SET_USER_ERROR', null);
 
         const FETCH_USER = gql`
           query($id: [Int!]) {
@@ -71,7 +73,7 @@ const actions = {
             });
             commit('SET_USER', response.data.userSearch[0]);
         } catch (error) {
-            commit('SET_ERROR', error.message);
+            commit('SET_USER_ERROR', error.message);
         } finally {
             commit('SET_PROFILE_LOADING', false);
         }
@@ -91,8 +93,11 @@ const mutations = {
     SET_PROFILE_LOADING(state, loading) {
         state.profileLoading = loading;
     },
-    SET_ERROR(state, error) {
-        state.error = error;
+    SET_SEARCH_ERROR(state, error) {
+        state.searchError = error;
+    },
+    SET_USER_ERROR(state, error) {
+        state.userError = error;
     },
     CLEAR_USER(state) {
         state.user = null;

@@ -52,7 +52,7 @@ const router = useRouter();
 
 const users = computed(() => store.getters['search/users']);
 const userListLoading = computed(() => store.getters['search/userListLoading']);
-const error = computed(() => store.getters['search/error']);
+const error = computed(() => store.getters['search/searchError']);
 
 const imageLoadingStatus = reactive({});
 const selectedUserId = ref(null);
