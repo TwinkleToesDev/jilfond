@@ -1,13 +1,7 @@
-<script setup>
-
-</script>
-
 <template>
-    <div>
-        <h1>Hello World2</h1>
-    </div>
+    <router-view />
 </template>
 
-<style scoped>
-
+<style lang="scss">
+@import './assets/base.scss';
 </style>

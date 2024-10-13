@@ -1,0 +1,13 @@
+{
+    "user_button_label": "Пользователь",
+    "profile_placeholder": "Выберите сотрудника, чтобы посмотреть его профиль",
+    "search_input_placeholder": "Введите Id или имя",
+    "search_title": "Поиск сотрудников",
+    "loading_label": "Загрузка...",
+    "search_result_title": "Результаты",
+    "search_result_start": "начните поиск",
+    "search_result_empty": "ничего не найдено",
+    "email_label": "Email",
+    "phone_label": "Телефон",
+    "about_me_label": "О себе"
+}
