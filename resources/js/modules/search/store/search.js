@@ -42,6 +42,7 @@ const actions = {
             });
             commit('SET_USERS', response.data.userSearch);
         } catch (error) {
+            console.error('searchUsers error: ',error)
             commit('SET_SEARCH_ERROR', error.message);
         } finally {
             commit('SET_USER_LIST_LOADING', false);
@@ -73,6 +74,7 @@ const actions = {
             });
             commit('SET_USER', response.data.userSearch[0]);
         } catch (error) {
+            console.error('getUserById error: ',error)
             commit('SET_USER_ERROR', error.message);
         } finally {
             commit('SET_PROFILE_LOADING', false);
